@@ -1,9 +1,9 @@
 public class Vars
 {
-    public int numeroDeCarrinhos { get; set; } = 
-    public int numeroDePassageiros { get; set; } = 
-    public int capacidadeCarrinho { get; set; } = 
-    public DateTime tempoDePasseio { get; set; } = 
-    public DateTime tempoDeEmbarqueDesembarque { get; set; } =
-    public DateTime intervaloPassageiros { get; set; } = 
+    public int numeroDeCarrinhos { get; set; } = 500;
+    public int numeroDePassageiros { get; set; } = 500;
+    public int capacidadeCarrinho { get; set; } = 500;
+    public int tempoDePasseio { get; set; } = 2000;
+    public int tempoDeEmbarqueDesembarque { get; set; } = 2000;
+    public int intervaloPassageiros { get; set; } = 2000;
 }

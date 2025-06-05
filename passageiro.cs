@@ -1,12 +1,30 @@
 using System.Security.Cryptography.X509Certificates;
 
-public class Passageiro(
-    //public int id = {get;}
-    //public datetime horaChegada {get;}
-    //public datetime horaEmbarque {get;}
+public class Passageiro
+{
+    public int Id { get; }
+    public DateTime horaChegada { get; }
+    public DateTime? horaEmbarque { get; }
 
-    public
-);
+    public Passageiro(int id)
+    {
+        Id = id;
+        horaChegada = DateTime.Now;
+    }
 
-public 
+    public TimeSpan TempoDeEspera
+    {
+        get
+        {
+            if (horaEmbarque.HasValue)
+            {
+                return horaEmbarque.Value - horaChegada;
+            }
+            else
+            {
+                return TimeSpan.Zero;
+            }
+        }
+    }
+};
 
