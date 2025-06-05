@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Trabalho-MontanhaRussa\\Montanha_Russa\\Montanha_Russa.csproj",
+      "projectUniqueName": "D:\\Trabalho-MontanhaRussa\\Roller_coaster\\Montanha_Russa.csproj",
       "projectName": "Montanha_Russa",
-      "projectPath": "D:\\Trabalho-MontanhaRussa\\Montanha_Russa\\Montanha_Russa.csproj",
+      "projectPath": "D:\\Trabalho-MontanhaRussa\\Roller_coaster\\Montanha_Russa.csproj",
       "packagesPath": "C:\\Users\\eduar\\.nuget\\packages\\",
-      "outputPath": "D:\\Trabalho-MontanhaRussa\\Montanha_Russa\\obj\\",
+      "outputPath": "D:\\Trabalho-MontanhaRussa\\Roller_coaster\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

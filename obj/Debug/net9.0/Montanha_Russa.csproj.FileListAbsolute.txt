@@ -12,3 +12,11 @@ D:\Trabalho-MontanhaRussa\Montanha_Russa\obj\Debug\net9.0\refint\Montanha_Russa.
 D:\Trabalho-MontanhaRussa\Montanha_Russa\obj\Debug\net9.0\Montanha_Russa.pdb
 D:\Trabalho-MontanhaRussa\Montanha_Russa\obj\Debug\net9.0\Montanha_Russa.genruntimeconfig.cache
 D:\Trabalho-MontanhaRussa\Montanha_Russa\obj\Debug\net9.0\ref\Montanha_Russa.dll
+D:\Trabalho-MontanhaRussa\Roller_coaster\obj\Debug\net9.0\Montanha_Russa.GeneratedMSBuildEditorConfig.editorconfig
+D:\Trabalho-MontanhaRussa\Roller_coaster\obj\Debug\net9.0\Montanha_Russa.AssemblyInfoInputs.cache
+D:\Trabalho-MontanhaRussa\Roller_coaster\obj\Debug\net9.0\Montanha_Russa.AssemblyInfo.cs
+D:\Trabalho-MontanhaRussa\Roller_coaster\obj\Debug\net9.0\Montanha_Russa.csproj.CoreCompileInputs.cache
+D:\Trabalho-MontanhaRussa\Roller_coaster\obj\Debug\net9.0\Montanha_Russa.sourcelink.json
+D:\Trabalho-MontanhaRussa\Roller_coaster\obj\Debug\net9.0\Montanha_Russa.dll
+D:\Trabalho-MontanhaRussa\Roller_coaster\obj\Debug\net9.0\refint\Montanha_Russa.dll
+D:\Trabalho-MontanhaRussa\Roller_coaster\obj\Debug\net9.0\Montanha_Russa.pdb

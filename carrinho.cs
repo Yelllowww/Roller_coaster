@@ -3,7 +3,7 @@ using System.Dynamic;
 public class Carrinho
 {
     public int Id { get; }
-    public List<Passageiro> Passageiros { get; } = new();
+    //public List<Passageiro> Passageiros { get; } = new();
     public TimeSpan tempoDeUso { get; private set; }
 
     public Carrinho(int id)
@@ -13,8 +13,6 @@ public class Carrinho
 
     public void Passeio(int tempo)
     {
-        //tira passageiros da fila
-        //embarca os passageiros
         //executa o passeio
         //desembarca os passageiros
         //registra o tempo

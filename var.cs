@@ -1,4 +1,4 @@
-public class Vars
+public static class Values
 {
     public int numeroDeCarrinhos { get; set; } = 500;
     public int numeroDePassageiros { get; set; } = 500;
