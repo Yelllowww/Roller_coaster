@@ -1,4 +1,4 @@
-public static class Values
+public class Values
 {
     public int numeroDeCarrinhos { get; set; } = 500;
     public int numeroDePassageiros { get; set; } = 500;
