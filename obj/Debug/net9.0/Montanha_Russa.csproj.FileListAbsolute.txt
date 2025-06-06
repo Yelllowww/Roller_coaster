@@ -35,3 +35,10 @@ C:\Users\eduardo.giannetti\Desktop\Roller_coaster\Roller_coaster\obj\Debug\net9.
 C:\Users\eduardo.giannetti\Desktop\Roller_coaster\Roller_coaster\obj\Debug\net9.0\Montanha_Russa.pdb
 C:\Users\eduardo.giannetti\Desktop\Roller_coaster\Roller_coaster\obj\Debug\net9.0\Montanha_Russa.genruntimeconfig.cache
 C:\Users\eduardo.giannetti\Desktop\Roller_coaster\Roller_coaster\obj\Debug\net9.0\ref\Montanha_Russa.dll
+D:\Trabalho-MontanhaRussa\Roller_coaster\bin\Debug\net9.0\Montanha_Russa.exe
+D:\Trabalho-MontanhaRussa\Roller_coaster\bin\Debug\net9.0\Montanha_Russa.deps.json
+D:\Trabalho-MontanhaRussa\Roller_coaster\bin\Debug\net9.0\Montanha_Russa.runtimeconfig.json
+D:\Trabalho-MontanhaRussa\Roller_coaster\bin\Debug\net9.0\Montanha_Russa.dll
+D:\Trabalho-MontanhaRussa\Roller_coaster\bin\Debug\net9.0\Montanha_Russa.pdb
+D:\Trabalho-MontanhaRussa\Roller_coaster\obj\Debug\net9.0\Montanha_Russa.genruntimeconfig.cache
+D:\Trabalho-MontanhaRussa\Roller_coaster\obj\Debug\net9.0\ref\Montanha_Russa.dll
