@@ -2,9 +2,12 @@ using System.Collections.Concurrent;
 using System.Threading.Tasks;
 class MontanhaRussa(Values values)
 {
-    private SemaphoreSlim semaforo = new SemaphoreSlim(0);
-    private ConcurrentQueue<Passageiro> fila = new();
+    public int passageirosAtendidos = 0;
+    private SemaphoreSlim semaforo = new SemaphoreSlim(1,1);
+    private SemaphoreSlim passageirosDisponiveis = new SemaphoreSlim(0);
+    public ConcurrentQueue<Passageiro> fila = new();
     private ConcurrentQueue<Carrinho> carrinhos = new();
+    private int passageirosCriados = 0;
 
 
     public void GerarCarrinhos()
@@ -16,27 +19,37 @@ class MontanhaRussa(Values values)
         }
     }
 
-    public async Task Passeio()
+    public async Task Passeio(Carrinho carrinho)
     {
-        Carrinho carrinho = await EmbarcarPassageiros();
-        Console.WriteLine($"[{DateTime.Now}] - Carro {carrinho.Id} começou o passeio.");
-        await Task.Delay(values.tempoDePasseio);
-        Console.WriteLine($"[{DateTime.Now}] - Carro {carrinho.Id} retornou e começou o desembarque.");
-        carrinho.Passageiros.Clear(); //é necessário citar desembarque?
-        carrinhos.Enqueue(carrinho);
-
-
+        await semaforo.WaitAsync();
+        try
+        {
+            Console.WriteLine($"[{DateTime.Now}] - Carro {carrinho.Id} começou o passeio.");
+            await Task.Delay(values.tempoDePasseio);
+            Console.WriteLine($"[{DateTime.Now}] - Carro {carrinho.Id} retornou e começou o desembarque.");
+            passageirosAtendidos += carrinho.Passageiros.Count;
+            carrinho.Passageiros.Clear(); //é necessário citar desembarque?
+            carrinhos.Enqueue(carrinho);
+        }
+        finally
+        {
+            semaforo.Release();
+        }
     }
 
     public async Task<Carrinho> EmbarcarPassageiros()
     {
-        await semaforo.WaitAsync();
         if (carrinhos.TryDequeue(out Carrinho carrinho))
         {
-            Console.WriteLine($"[{DateTime.Now}] - Carro {carrinho.Id} começou o embarque.");
             var passageirosCarrinho = new List<Passageiro>();
-            for (int i = 0; i < values.capacidadeCarrinho; i++)
+            Console.WriteLine($"[{DateTime.Now}] - Carro {carrinho.Id} começou o embarque.");
+            while (passageirosCarrinho.Count < values.capacidadeCarrinho)
             {
+                if (passageirosCriados >= values.numeroDePassageiros && fila.IsEmpty)
+                {
+                    break;
+                }
+                await passageirosDisponiveis.WaitAsync();
                 if (fila.TryDequeue(out Passageiro passageiro))
                 {
                     await Task.Delay(values.tempoDeEmbarqueDesembarque);
@@ -48,9 +61,9 @@ class MontanhaRussa(Values values)
                     break;
                 }
             }
-            carrinho.Embarcar(passageirosCarrinho);
-            return carrinho;
-        }
+                carrinho.Embarcar(passageirosCarrinho);
+                return carrinho;
+            }
         return null;
     }
     public async Task GerarPassageiros()
@@ -67,8 +80,9 @@ class MontanhaRussa(Values values)
             ids.RemoveAt(index);
             var passageiro = new Passageiro(id);
             fila.Enqueue(passageiro);
+            passageirosDisponiveis.Release();
+            passageirosCriados++;
             Console.WriteLine($"[{passageiro.horaChegada}] - Passageiro {passageiro.Id} chegou.");
-            semaforo.Release();
 
         }
     }
