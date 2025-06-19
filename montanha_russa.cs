@@ -36,7 +36,12 @@ class MontanhaRussa(Values values)
             var tempoPasseio = (fim - inicio).TotalMilliseconds;
             carrinho.AdicionarTempo((int)tempoPasseio);
             passageirosAtendidos += carrinho.Passageiros.Count;
-            carrinho.Passageiros.Clear(); //é necessário citar desembarque?
+            foreach (var passageiro in carrinho.Passageiros)
+            {
+                await Task.Delay(values.tempoDeEmbarqueDesembarque);
+                Console.WriteLine($"[{DateTime.Now}] - Carro {carrinho.Id} desembarcou o passageiro {passageiro.Id}.");
+            }
+            carrinho.Passageiros.Clear(); //é necessário citar desembarque? //sim
             carrinhos.Enqueue(carrinho);
         }
         finally
@@ -104,7 +109,7 @@ class MontanhaRussa(Values values)
         double tempoMinimo = temposDeEspera.Min();
         double tempoMaximo = temposDeEspera.Max();
         double tempoMedio = temposDeEspera.Average();
-        Console.WriteLine($"Tempo mínimo de espera na fila: {tempoMinimo:F2}");
+        Console.WriteLine($"\nTempo mínimo de espera na fila: {tempoMinimo:F2}");
         Console.WriteLine($"Tempo máximo de espera na fila: {tempoMaximo:F2}");
         Console.WriteLine($"Tempo médio de espera na fila: {tempoMedio:F2}");
         foreach (var carrinho in carrinhos)
