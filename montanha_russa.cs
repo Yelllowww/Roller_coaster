@@ -27,8 +27,12 @@ class MontanhaRussa(Values values)
             Console.WriteLine($"[{DateTime.Now}] - Carro {carrinho.Id} começou o passeio.");
             await Task.Delay(values.tempoDePasseio);
             Console.WriteLine($"[{DateTime.Now}] - Carro {carrinho.Id} retornou e começou o desembarque.");
-            passageirosAtendidos += carrinho.Passageiros.Count;
-            carrinho.Passageiros.Clear(); //é necessário citar desembarque?
+            foreach (var passageiro in carrinho.Passageiros)
+            {
+                await Task.Delay(values.tempoDeEmbarqueDesembarque);
+                Console.WriteLine($"[{DateTime.Now}] - Carro {carrinho.Id} desembarcou o passageiro {passageiro.Id}.");
+            }
+            carrinho.Passageiros.Clear(); //é necessário citar desembarque? //sim
             carrinhos.Enqueue(carrinho);
         }
         finally
