@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Montanha_Russa")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0dd762e1a88a13e22d9954f6c1df45f20a1799f3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4bed45301fa4179bc38a2042becd6ba08620cf39")]
 [assembly: System.Reflection.AssemblyProductAttribute("Montanha_Russa")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Montanha_Russa")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -8,23 +8,23 @@
     "net9.0": []
   },
   "packageFolders": {
-    "C:\\Users\\eduar\\.nuget\\packages\\": {},
+    "C:\\Users\\eduardo.giannetti\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Trabalho-MontanhaRussa\\Roller_coaster\\Montanha_Russa.csproj",
+      "projectUniqueName": "C:\\Users\\eduardo.giannetti\\Desktop\\RollerCoaster\\Roller_coaster\\Montanha_Russa.csproj",
       "projectName": "Montanha_Russa",
-      "projectPath": "D:\\Trabalho-MontanhaRussa\\Roller_coaster\\Montanha_Russa.csproj",
-      "packagesPath": "C:\\Users\\eduar\\.nuget\\packages\\",
-      "outputPath": "D:\\Trabalho-MontanhaRussa\\Roller_coaster\\obj\\",
+      "projectPath": "C:\\Users\\eduardo.giannetti\\Desktop\\RollerCoaster\\Roller_coaster\\Montanha_Russa.csproj",
+      "packagesPath": "C:\\Users\\eduardo.giannetti\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\eduardo.giannetti\\Desktop\\RollerCoaster\\Roller_coaster\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\eduar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\eduardo.giannetti\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -73,7 +73,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
