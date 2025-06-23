@@ -4,7 +4,8 @@ public class Passageiro
 {
     public int Id { get; }
     public DateTime horaChegada { get; }
-    public DateTime? horaEmbarque { get; }
+    public DateTime? horaEmbarque { get; set; }
+    public TaskCompletionSource<bool> EmbarqueCompletionSource { get; } = new();
 
     public Passageiro(int id)
     {

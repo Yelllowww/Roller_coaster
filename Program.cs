@@ -2,7 +2,7 @@
 MontanhaRussa montanhaRussa = new MontanhaRussa(values);
 while (true)
 {
-    Console.WriteLine("Digite 1 para inserir valores, 2 para default");
+    Console.WriteLine("\nDigite 1 para inserir valores, 2 para default, 3 para ȩ̸̡̨̝̹̣̮̖̯̪̤͉̯̰̑a̷͚͙̤̱̖͖̘̜̠̳͔̓̐͝s̷̨͙̞͕̗̳̠̆̽̈́̈́̔̓͝ť̴͔͉̯̗̗̜̝̏͊͗̔͋e̵̗̙̠͕̊͗̽͆͒̇͋̆̿͌̽̀̕͘r̷̨̛̯̰̘̣̽̈́̾͛͛̎̄̽̈́̇̚͝͝ ̸̡̧̰̪͓͇̪̦̘̥͇̀̕ẹ̶̦̣̻̱̞̍̒̎̈͆̾̌̑͒͘͝ͅģ̵̡̤̠̗͍͚̠̬͇̭͇͕̄̒g̶̯̙͈̰̳͙͉̃͘");
     int decisao = Convert.ToInt32(Console.ReadLine());
     if (decisao == 1)
     {
@@ -39,49 +39,6 @@ while (true)
             {
                 tarefasPasseio.Add(montanhaRussa.Passeio(carrinho));
             }
-            else
-            {
-                break;
-            }
-        }
-        await Task.WhenAll(tarefasPasseio);
-        await geraPassageirosTask;
-
-
-        Console.WriteLine("Pressione 1 para sair e 2 para reiniciar a simulação.");
-        int opcao = Convert.ToInt16(Console.ReadLine());
-        if (opcao == 1)
-        {
-            break;
-        }
-        else if (opcao == 2)
-        {
-            continue;
-        }
-        else
-        {
-            Console.WriteLine("Opção inválida. Tente novamente.");
-        }
-    }
-
-    else
-    {
-
-        montanhaRussa.GerarCarrinhos();
-        DateTime inicioSimulacao = DateTime.Now;
-        var geraPassageirosTask = montanhaRussa.GerarPassageiros();
-        var tarefasPasseio = new List<Task>();
-        while (montanhaRussa.passageirosAtendidos < values.numeroDePassageiros)
-        {
-            var carrinho = await montanhaRussa.EmbarcarPassageiros();
-            if (carrinho != null && carrinho.Passageiros.Count > 0)
-            {
-                tarefasPasseio.Add(montanhaRussa.Passeio(carrinho));
-            }
-            else
-            {
-                break;
-            }
         }
         await Task.WhenAll(tarefasPasseio);
         await geraPassageirosTask;
@@ -95,11 +52,124 @@ while (true)
         }
         else if (opcao == 2)
         {
+            montanhaRussa.Retry();
             continue;
         }
         else
         {
             Console.WriteLine("Opção inválida. Tente novamente.");
+        }
+    }
+
+    else if (decisao == 2)
+    {
+        montanhaRussa.GerarCarrinhos();
+        DateTime inicioSimulacao = DateTime.Now;
+        var geraPassageirosTask = montanhaRussa.GerarPassageiros();
+        var tarefasPasseio = new List<Task>();
+        while (montanhaRussa.passageirosAtendidos < values.numeroDePassageiros)
+        {
+            var carrinho = await montanhaRussa.EmbarcarPassageiros();
+            if (carrinho != null && carrinho.Passageiros.Count > 0)
+            {
+                tarefasPasseio.Add(montanhaRussa.Passeio(carrinho));
+            }
+        }
+        await Task.WhenAll(tarefasPasseio);
+        await geraPassageirosTask;
+        string ascii = @"
+                       .,,uod8B8bou,,.
+              ..,uod8BBBBBBBBBBBBBBBBRPFT?l!i:.
+         ,=m8BBBBBBBBBBBBBBBRPFT?!||||||||||||||
+         !...:!TVBBBRPFT||||||||||!!^^""'   ||||
+         !.......:!?|||||!!^^""'            ||||
+         !.........||||                     ||||
+         !.........||||  ##                 ||||
+         !.........||||                     ||||
+         !.........||||                     ||||
+         !.........||||                     ||||
+         !.........||||                     ||||
+         `.........||||                    ,||||
+          .;.......||||               _.-!!|||||
+   .,uodWBBBBb.....||||       _.-!!|||||||||!:'
+!YBBBBBBBBBBBBBBb..!|||:..-!!|||||||!iof68BBBBBb....
+!..YBBBBBBBBBBBBBBb!!||||||||!iof68BBBBBBRPFT?!::   `.
+!....YBBBBBBBBBBBBBBbaaitf68BBBBBBRPFT?!:::::::::     `.
+!......YBBBBBBBBBBBBBBBBBBBRPFT?!::::::;:!^'`;:::       `.
+!........YBBBBBBBBBBRPFT?!::::::::::^''...::::::;         iBBbo.
+`..........YBRPFT?!::::::::::::::::::::::::;iof68bo.      WBBBBbo.
+  `..........:::::::::::::::::::::::;iof688888888888b.     `YBBBP^'
+    `........::::::::::::::::;iof688888888888888888888b.     `
+      `......:::::::::;iof688888888888888888888888888888b.
+        `....:::;iof688888888888888888888888888888888899fT!
+          `..::!8888888888888888888888888888888899fT|!^''
+            `' !!988888888888888888888888899fT|!^''
+                `!!8888888888888888899fT|!^''
+                  `!988888888899fT|!^''
+                    `!9899fT|!^''
+                      `!^''
+        ";
+        foreach (var line in ascii.Split('\n'))
+        {
+            Console.WriteLine(line);
+            Thread.Sleep(40);
+        }
+        montanhaRussa.Estatisticas(inicioSimulacao);
+        Console.WriteLine("Pressione 1 para sair e 2 para reiniciar a simulação.");
+        int opcao = Convert.ToInt16(Console.ReadLine());
+        if (opcao == 1)
+        {
+            break;
+        }
+        else if (opcao == 2)
+        {
+            montanhaRussa.Retry();
+            continue;
+        }
+        else
+        {
+            Console.WriteLine("Opção inválida. Tente novamente.");
+        }
+    }
+    else if (decisao == 3)
+    {
+        string ascii = @"
+           o
+           |
+         ,'~'.
+        /     \
+       |   ____|_
+       |  '___,,_'         .----------------.
+       |  ||(o |o)|       ( KILL ALL HUMANS! )
+       |   -------         ,----------------'
+       |  _____|         -'
+       \  '####,
+        -------
+      /________\
+    (  )        |)
+    '_ ' ,------|\         _
+   /_ /  |      |_\        ||
+  /_ /|  |     o| _\      _|| 
+ /_ / |  |      |\ _\____//' |
+(  (  |  |      | (_,_,_,____/
+ \ _\ |   ------|        
+  \ _\|_________|
+   \ _\ \__\\__\
+   |__| |__||__|
+||/__/  |__||__|
+        |__||__|
+        |__||__|
+        /__)/__)
+       /__//__/
+      /__//__/
+     /__//__/.
+   .'    '.   '.
+  (_kOs____)____)
+            ";
+        foreach (var line in ascii.Split('\n'))
+        {
+            Console.WriteLine(line);
+            Thread.Sleep(40);
         }
     }
 }
