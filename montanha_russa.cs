@@ -35,6 +35,7 @@ class MontanhaRussa(Values values)
             await Task.Delay(values.tempoDePasseio);
 
             var fim = DateTime.Now;
+            semaforo.Release();
             Console.WriteLine($"[{DateTime.Now}] - Carro {carrinho.Id} retornou e começou o desembarque.");
             var tempoPasseio = (fim - inicio).TotalMilliseconds;
             carrinho.AdicionarTempo((int)tempoPasseio);
@@ -45,11 +46,10 @@ class MontanhaRussa(Values values)
             }
             passageirosAtendidos += carrinho.Passageiros.Count;
             carrinho.Passageiros.Clear(); //é necessário citar desembarque? //sim
-            carrinhos.Enqueue(carrinho);
         }
         finally
         {
-            semaforo.Release();
+            carrinhos.Enqueue(carrinho);
         }
     }
 
@@ -120,12 +120,15 @@ class MontanhaRussa(Values values)
         double tempoMinimo = temposDeEspera.Min();
         double tempoMaximo = temposDeEspera.Max();
         double tempoMedio = temposDeEspera.Average();
-        Console.WriteLine($"\nTempo mínimo de espera na fila: {tempoMinimo / 100:F2} segundos");
-        Console.WriteLine($"Tempo máximo de espera na fila: {tempoMaximo / 100:F2} segundos");
-        Console.WriteLine($"Tempo médio de espera na fila: {tempoMedio / 100:F2} segundos");
+
+        Console.WriteLine("Relatório:");
+        Console.WriteLine($"\nTempo mínimo de espera na fila: {tempoMinimo /1000:F2} segundos");
+        Console.WriteLine($"Tempo máximo de espera na fila: {tempoMaximo /1000:F2} segundos");
+        Console.WriteLine($"Tempo médio de espera na fila: {tempoMedio /1000:F2} segundos");
+
         foreach (var carrinho in carrinhosStatsList)
         {
-            float tempoDeUso = carrinho.TempoDeUso;
+            float tempoDeUso = carrinho.tempoDeUso;
             double eficiencia = tempoDeUso / tempoTotalSimulacao * 100;
             Console.WriteLine($"Carro {carrinho.Id} - Eficiência: {eficiencia:F2}%");
         }

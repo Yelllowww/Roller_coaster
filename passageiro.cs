@@ -12,20 +12,5 @@ public class Passageiro
         Id = id;
         horaChegada = DateTime.Now;
     }
-
-    public TimeSpan TempoDeEspera
-    {
-        get
-        {
-            if (horaEmbarque.HasValue)
-            {
-                return horaEmbarque.Value - horaChegada;
-            }
-            else
-            {
-                return TimeSpan.Zero;
-            }
-        }
-    }
 };
 

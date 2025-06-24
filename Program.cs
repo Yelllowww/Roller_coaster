@@ -1,8 +1,36 @@
-﻿Values values = new Values();
+﻿using System.Text;
+
+Values values = new Values();
 MontanhaRussa montanhaRussa = new MontanhaRussa(values);
+async Task Exec()
+{
+    montanhaRussa.GerarCarrinhos();
+    DateTime inicioSimulacao = DateTime.Now;
+    var geraPassageirosTask = montanhaRussa.GerarPassageiros();
+    var tarefasPasseio = new List<Task>();
+    while (montanhaRussa.passageirosAtendidos < values.numeroDePassageiros)
+    {
+        var carrinho = await montanhaRussa.EmbarcarPassageiros();
+        if (carrinho != null && carrinho.Passageiros.Count > 0)
+        {
+            tarefasPasseio.Add(montanhaRussa.Passeio(carrinho));
+        }
+    }
+    await Task.WhenAll(tarefasPasseio);
+    await geraPassageirosTask;
+    montanhaRussa.Estatisticas(inicioSimulacao);
+}
+void imprime(string ascii)
+{
+    foreach (var line in ascii.Split('\n'))
+    {
+        Console.WriteLine(line);
+        Thread.Sleep(40);
+    }
+}
 while (true)
 {
-    Console.WriteLine("\nDigite 1 para inserir valores, 2 para default, 3 para ȩ̸̡̨̝̹̣̮̖̯̪̤͉̯̰̑a̷͚͙̤̱̖͖̘̜̠̳͔̓̐͝s̷̨͙̞͕̗̳̠̆̽̈́̈́̔̓͝ť̴͔͉̯̗̗̜̝̏͊͗̔͋e̵̗̙̠͕̊͗̽͆͒̇͋̆̿͌̽̀̕͘r̷̨̛̯̰̘̣̽̈́̾͛͛̎̄̽̈́̇̚͝͝ ̸̡̧̰̪͓͇̪̦̘̥͇̀̕ẹ̶̦̣̻̱̞̍̒̎̈͆̾̌̑͒͘͝ͅģ̵̡̤̠̗͍͚̠̬͇̭͇͕̄̒g̶̯̙͈̰̳͙͉̃͘");
+    Console.WriteLine("\nDigite 1 para inserir valores, 2 para valores default, 3 para sair. 4 para easter egg.");
     int decisao = Convert.ToInt32(Console.ReadLine());
     if (decisao == 1)
     {
@@ -27,23 +55,7 @@ while (true)
         Console.WriteLine("Digite o intervalo máximo de chegada (em segundos): ");
         values.intervaloMaximo = Convert.ToInt32(Console.ReadLine()) * 1000;
 
-
-        montanhaRussa.GerarCarrinhos();
-        DateTime inicioSimulacao = DateTime.Now;
-        var geraPassageirosTask = montanhaRussa.GerarPassageiros();
-        var tarefasPasseio = new List<Task>();
-        while (montanhaRussa.passageirosAtendidos < values.numeroDePassageiros)
-        {
-            var carrinho = await montanhaRussa.EmbarcarPassageiros();
-            if (carrinho != null && carrinho.Passageiros.Count > 0)
-            {
-                tarefasPasseio.Add(montanhaRussa.Passeio(carrinho));
-            }
-        }
-        await Task.WhenAll(tarefasPasseio);
-        await geraPassageirosTask;
-        montanhaRussa.Estatisticas(inicioSimulacao);
-
+        await Exec();
         Console.WriteLine("Pressione 1 para sair e 2 para reiniciar a simulação.");
         int opcao = Convert.ToInt16(Console.ReadLine());
         if (opcao == 1)
@@ -63,20 +75,32 @@ while (true)
 
     else if (decisao == 2)
     {
-        montanhaRussa.GerarCarrinhos();
-        DateTime inicioSimulacao = DateTime.Now;
-        var geraPassageirosTask = montanhaRussa.GerarPassageiros();
-        var tarefasPasseio = new List<Task>();
-        while (montanhaRussa.passageirosAtendidos < values.numeroDePassageiros)
+        await Exec();
+
+        Console.WriteLine("Pressione 1 para sair e 2 para reiniciar a simulação.");
+        int opcao = Convert.ToInt16(Console.ReadLine());
+        if (opcao == 1)
         {
-            var carrinho = await montanhaRussa.EmbarcarPassageiros();
-            if (carrinho != null && carrinho.Passageiros.Count > 0)
-            {
-                tarefasPasseio.Add(montanhaRussa.Passeio(carrinho));
-            }
+            break;
         }
-        await Task.WhenAll(tarefasPasseio);
-        await geraPassageirosTask;
+        else if (opcao == 2)
+        {
+            montanhaRussa.Retry();
+            continue;
+        }
+        else
+        {
+            Console.WriteLine("Opção inválida. Tente novamente.");
+        }
+    }
+
+    else if (decisao == 3)
+    {
+        break;
+    }
+    else if (decisao == 4)
+    {
+        await Exec();
         string ascii = @"
                        .,,uod8B8bou,,.
               ..,uod8BBBBBBBBBBBBBBBBRPFT?l!i:.
@@ -108,13 +132,9 @@ while (true)
                   `!988888888899fT|!^''
                     `!9899fT|!^''
                       `!^''
-        ";
-        foreach (var line in ascii.Split('\n'))
-        {
-            Console.WriteLine(line);
-            Thread.Sleep(40);
-        }
-        montanhaRussa.Estatisticas(inicioSimulacao);
+";
+        imprime(ascii);
+
         Console.WriteLine("Pressione 1 para sair e 2 para reiniciar a simulação.");
         int opcao = Convert.ToInt16(Console.ReadLine());
         if (opcao == 1)
@@ -131,7 +151,8 @@ while (true)
             Console.WriteLine("Opção inválida. Tente novamente.");
         }
     }
-    else if (decisao == 3)
+
+    else
     {
         string ascii = @"
            o
@@ -166,10 +187,6 @@ while (true)
    .'    '.   '.
   (_kOs____)____)
             ";
-        foreach (var line in ascii.Split('\n'))
-        {
-            Console.WriteLine(line);
-            Thread.Sleep(40);
-        }
+        imprime(ascii);
     }
 }

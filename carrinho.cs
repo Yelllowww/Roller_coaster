@@ -5,7 +5,7 @@ public class Carrinho
 {
     public int Id { get; }
     public List<Passageiro> Passageiros { get; set; }
-    public int TempoDeUso { get; private set; }
+    public int tempoDeUso { get; private set; }
 
     public Carrinho(int id)
     {
@@ -14,7 +14,7 @@ public class Carrinho
     }
     public void AdicionarTempo(int tempoPasseio)
     {
-        TempoDeUso += tempoPasseio; 
+        tempoDeUso += tempoPasseio; 
     }
     public void Embarcar(List<Passageiro> passageiros)
     {
